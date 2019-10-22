@@ -1,0 +1,71 @@
+<html>
+    <title>Contact Page</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        function getData()
+        {
+            var nameCheck = false;
+            var emailCheck = false;
+            var termsCheck = false;
+            if(document.getElementById("txtName").value == "")
+            {
+                document.getElementById("txtName").style.background = "red";
+                nameCheck = false;
+            }
+            if(document.getElementById("txtEmail").value == "")
+            {
+                document.getElementById("txtEmail").style.background = "red";
+                emailCheck = false;
+            }
+            if(document.getElementById("txtName").value != "")
+            {
+                document.getElementById("txtName").style.background = "white";
+                nameCheck = true;
+            }
+            if(document.getElementById("txtEmail").value != "")
+            {
+                document.getElementById("txtEmail").style.background = "white";
+                emailCheck = true;
+            }
+            if(document.getElementById("terms").value.trim() == "yes")
+            {
+                termsCheck = true;
+            }
+            if(nameCheck == true && emailCheck == true && termsCheck == true)
+            {
+                window.alert("Thank you for contacting us")
+            }
+        }
+    </script>
+    </head>
+    <body>
+        <a href="homepage.html" style="text-decoration:none">Home Page</a><br>
+        <a href="secondpage.html" style="text-decoration:none">Second Page</a>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" id="txtName"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" id="txtEmail"></td>
+            </tr>
+            <tr>
+                <td>Do you agree to the terms of service?</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="terms" name="agreement" value="yes">Yes</td>
+            </tr>
+            <tr>
+                <td><input type="radio" id="terms" name="agreement" value="no">No</td>
+            </tr>
+            <tr>
+                <td colspan="2"><button id="btnSubmit" onClick="getData();">Submit</button></td>
+            </tr>
+        </table>
+    </body>
+</html>

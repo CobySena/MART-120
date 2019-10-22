@@ -1,0 +1,67 @@
+<html>
+    <title>for Loops</title>
+    <head>
+    <script>
+        var actualAnswer;
+        var number1;
+        var number2;
+        var numGames = 0;
+        var numAttempts = 0;
+        var rightAnswers = 0;
+        var wrongAnswers = 0;
+        function printQuestion()
+        {
+            actualAnswer = number1 + number2;
+            document.getElementById("theQuestion").innerHTML = "What is " + number1 + "+" + number2 + "?";
+        }
+        function checkAnswer()
+        {
+            if(numAttempts < 10)
+            {
+                var answer = document.getElementById("txtAnswer").value;
+                if(answer == actualAnswer)
+                {
+                    document.getElementById("finalResult").innerHTML = "Good job!";
+                    rightAnswers += 1;
+                    numAttempts += 1;
+                    numGames += 1;
+                    runGame();
+                }
+                else
+                {
+                    document.getElementById("finalResult").innerHTML = "Try Again!";
+                    wrongAnswers += 1;
+                    numAttempts += 1;
+                }
+            }
+            else if(numAttempts == 10)
+            {
+                document.getElementById("finalResult").innerHTML = "Right Answers = " + rightAnswers + "  Wrong Answers = " + wrongAnswers + "  Percent Right = " + (rightAnswers / numAttempts) * 100 + "%";
+            }
+        }
+
+        function runGame()
+        {
+            for(var i = 0; i < 5; i++)
+            {
+                 number1 = Math.floor(Math.random() * 10);
+                 number2 = Math.floor(Math.random() * 10);
+            }
+            printQuestion();
+        }
+    </script>
+    </head>
+    <body onload="runGame();">
+        <div id="theQuestion"></div>
+            <table>
+                <tr>
+                    <td>Your answer</td>
+                    <td><input type="text" id="txtAnswer"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button id="btnSubmit" onClick="checkAnswer();">Submit</button></td>
+                </tr>
+            </table>
+        <div id="finalResult"></div>
+    </body>
+ </html>
