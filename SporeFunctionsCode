@@ -1,0 +1,126 @@
+var x = 30;
+var y = 30;
+var x1 = 500;
+var y1 = 400;
+var x2 = 300;
+var y2 = 500;
+var diameter = 25;
+var mousex = -50;
+var mousey = -50;
+
+function setup()
+{
+    createCanvas(600,600);
+}
+
+function draw()
+{
+    background(52, 152, 235);
+    player();
+    movement();
+    createCircle();
+    obstacles();
+    exit();
+    if(x >= 400 && y >= 595)
+    {
+        win();
+    }
+}
+
+function mousePressed()
+{
+    mousex = mouseX;
+    mousey = mouseY;
+}
+
+function player()
+{
+    fill(24, 200, 29);
+    circle(x, y, diameter);
+}
+
+function movement()
+{
+    if (keyIsDown(83)) 
+    {
+        y += 3;
+    } 
+    else if (keyIsDown(87)) 
+    {
+        y -= 3;
+    }
+    else if (keyIsDown(68)) 
+    {
+        x += 3;
+    }
+    else if (keyIsDown(65)) 
+    {
+        x -= 3;
+    }
+}
+
+function createCircle()
+{
+    fill(168, 50, 50);
+    circle(mousex, mousey, 45);
+}
+
+function obstacles()
+{
+    fill(232, 223, 49);
+    ellipse(x1,y1,50,80);
+    fill(137, 12, 179);
+    ellipse(x2,y2,90,30);
+    moveObstacles();
+}
+
+function moveObstacles()
+{
+    if(x1 > 0 && x1 < 600)
+    {
+        x1 -= 10;
+    }
+    else if(x1 <= 0 || x1 >= 600)
+    {
+        x1 += 599;
+    }
+    if(y1 > 0 && y1 < 600)
+    {
+        y1 -= 7;
+    }
+    else if(y1 <= 0 || y1 >= 600)
+    {
+        y1 += 599;
+    }
+    if(x2 > 0 && x2 < 600)
+    {
+        x2 += 4;
+    }
+    else if(x2 <= 0 || x2 >= 600)
+    {
+        x2 -= 599;
+    }
+    if(y2 > 0 && y2 < 600)
+    {
+        y2 -= 12;
+    }
+    else if(y2 <= 0 || y2 >= 600)
+    {
+        y2 += 599;
+    }
+}
+
+function exit()
+{
+    fill(0);
+    rect(400,595,200,5);
+    textSize(32);
+    text('EXIT',470,580);
+}
+
+function win()
+{
+    fill(0);
+    textSize(64);
+    text('YOU WIN!', 140, 300);
+}
