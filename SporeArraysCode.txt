@@ -1,0 +1,129 @@
+var x = 30;
+var y = 30;
+var diameter = 25;
+var mousex = -50;
+var mousey = -50;
+var myXs = [];
+var myYs = [];
+var myDiameters = [];
+
+// var x1 = 500;
+// var y1 = 400;
+// var x2 = 300;
+// var y2 = 500;
+
+function setup()
+{
+    createCanvas(600,600);
+    for(var i = 0; i < 5; i++)
+    {
+        myXs[i] = getRandom(600);
+        myYs[i] = getRandom(600);
+        myDiameters[i] = getRandom(100);
+    }
+}
+
+function draw()
+{
+    background(52, 152, 235);
+    player();
+    movement();
+    createCircle();
+    obstacles();
+    exit();
+    if(x >= 400 && y >= 595)
+    {
+        win();
+    }
+}
+
+function mousePressed()
+{
+    mousex = mouseX;
+    mousey = mouseY;
+}
+
+function player()
+{
+    fill(24, 200, 29);
+    circle(x, y, diameter);
+}
+
+function movement()
+{
+    if (keyIsDown(83)) 
+    {
+        y += 3;
+    } 
+    else if (keyIsDown(87)) 
+    {
+        y -= 3;
+    }
+    else if (keyIsDown(68)) 
+    {
+        x += 3;
+    }
+    else if (keyIsDown(65)) 
+    {
+        x -= 3;
+    }
+}
+
+function createCircle()
+{
+    fill(168, 50, 50);
+    circle(mousex, mousey, 45);
+}
+
+function obstacles()
+{
+    for(var i = 0; i < myXs.length; i++)
+    {
+        fill(Math.floor(Math.random()*256),Math.floor(Math.random()*256),Math.floor(Math.random()*256));
+        circle(myXs[i], myYs[i], myDiameters[i]);
+    }
+    moveObstacles();
+}
+
+function moveObstacles()
+{
+    for(var i = 0; i < myXs.length; i++)
+    {
+        if(myXs[i] > 0 && myXs[i] < 600)
+        {
+            myXs[i] -= getRandom(6);
+        }
+        else if(myXs[i] <= 0 || myXs[i] >= 600)
+        {
+            myXs[i] += 599;
+        }
+        if(myYs[i] > 0 && myYs[i] < 600)
+        {
+            myYs[i] -= getRandom(6);
+        }
+        else if(myYs[i] <= 0 || myYs[i] >= 600)
+        {
+            myYs[i] += 599;
+        }
+    }
+}
+
+function exit()
+{
+    fill(0);
+    rect(400,595,200,5);
+    textSize(32);
+    text('EXIT',470,580);
+}
+
+function win()
+{
+    fill(0);
+    textSize(64);
+    text('YOU WIN!', 140, 300);
+}
+
+function getRandom(r)
+    {
+        return Math.floor(Math.random()*r);
+    }
